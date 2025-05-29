@@ -486,7 +486,7 @@ const HomePage: React.FC = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="keywords"
-          content="KoshiLabs, Koshi Labs, software development, Birtamode, Jhapa, Nepal, web development, mobile app development, database, performance optimization, AI solutions, custom software, digital transformation, IT services, consulting, Nepali tech company, software company Nepal"
+          content="test-websites, Koshi Labs, software development, Birtamode, Jhapa, Nepal, web development, mobile app development, database, performance optimization, AI solutions, custom software, digital transformation, IT services, consulting, Nepali tech company, software company Nepal"
         />
         <meta
           property="og:title"
@@ -497,18 +497,18 @@ const HomePage: React.FC = () => {
           content="Leading software development company in Birtamode, Jhapa, Nepal offering innovative solutions in web development, mobile apps, and AI services."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://koshilabs.com" />
+        <meta property="og:url" content="https://test-websites.com" />
         <meta
           property="og:image"
-          content="https://koshilabs.com/og-image.jpg"
+          content="https://test-websites.com/og-image.jpg"
         />
-        <meta property="og:site_name" content="KoshiLabs" />
+        <meta property="og:site_name" content="test-websites" />
         <meta property="og:locale" content="en_US" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="KoshiLabs - Crafting Digital Excellence"
+          content="test-websites - Crafting Digital Excellence"
         />
         <meta
           name="twitter:description"
@@ -516,7 +516,7 @@ const HomePage: React.FC = () => {
         />
         <meta
           name="twitter:image"
-          content="https://koshilabs.com/og-image.jpg"
+          content="https://test-websites.com/og-image.jpg"
         />
 
         <meta name="geo.region" content="NP-P1" />
@@ -524,7 +524,7 @@ const HomePage: React.FC = () => {
         <meta name="geo.position" content="26.6418;87.9927" />
         <meta name="ICBM" content="26.6418, 87.9927" />
 
-        <link rel="canonical" href="https://koshilabs.com" />
+        <link rel="canonical" href="https://test-websites.com" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -1018,7 +1018,8 @@ const HomePage: React.FC = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              KoshiLabs <span className="text-pink-400">❤️</span> Open Source
+              test-websites <span className="text-pink-400">❤️</span> Open
+              Source
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg">
               We believe in giving back to the community. Check out our open
@@ -1480,7 +1481,7 @@ const HomePage: React.FC = () => {
                 key={i}
                 className="text-[15vw] font-black text-white/[0.03] tracking-tight select-none leading-none h-full flex items-center"
               >
-                KOSHILABS&nbsp;
+                test-websiteS&nbsp;
               </span>
             ))}
           </motion.div>
@@ -1508,7 +1509,7 @@ const HomePage: React.FC = () => {
 
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
-            {/* KoshiLabs Text */}
+            {/* test-websites Text */}
             <div className="text-center md:text-left">
               <motion.div
                 className="flex items-center justify-center md:justify-start mb-4"
@@ -1550,29 +1551,29 @@ const HomePage: React.FC = () => {
                 whileHover={{ opacity: 1 }}
               >
                 <motion.a
-                  href="https://www.facebook.com/koshilabs"
+                  href="https://www.facebook.com/test-websites"
                   className="text-gray-400 hover:text-blue-400 transition-colors"
                   whileHover={{ y: -3, scale: 1.2 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  aria-label="KoshiLabs Facebook page"
+                  aria-label="test-websites Facebook page"
                 >
                   <Facebook className="w-5 h-5" />
                 </motion.a>
                 <motion.a
-                  href="https://x.com/koshilabs"
+                  href="https://x.com/test-websites"
                   className="text-gray-400 hover:text-blue-400 transition-colors"
                   whileHover={{ y: -3, scale: 1.2 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  aria-label="KoshiLabs X page"
+                  aria-label="test-websites X page"
                 >
                   <X className="w-5 h-5" />
                 </motion.a>
                 <motion.a
-                  href="https://www.linkedin.com/company/koshilabs"
+                  href="https://www.linkedin.com/company/test-websites"
                   className="text-gray-400 hover:text-blue-400 transition-colors"
                   whileHover={{ y: -3, scale: 1.2 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  aria-label="KoshiLabs LinkedIn page"
+                  aria-label="test-websites LinkedIn page"
                 >
                   <Linkedin className="w-5 h-5" />
                 </motion.a>
@@ -1582,7 +1583,7 @@ const HomePage: React.FC = () => {
                 className="text-gray-400 text-sm mt-6"
                 whileHover={{ color: "#60A5FA" }}
               >
-                © 2025 KoshiLabs. All rights reserved.
+                © 2025 test-websites. All rights reserved.
               </motion.div>
             </div>
 
@@ -1600,7 +1601,7 @@ const HomePage: React.FC = () => {
                   { text: "Testimonials", href: "#testimonials" },
                   { text: "FAQ", href: "#faq" },
                   { text: "Contact Us", href: "#contact" },
-                  { text: "Email Us", href: "mailto:koshilabs@gmail.com" },
+                  { text: "Email Us", href: "mailto:test-websites@gmail.com" },
                 ].map((link, index) => (
                   <motion.a
                     key={index}
@@ -1662,10 +1663,10 @@ const HomePage: React.FC = () => {
                   </div>
                   <span>
                     <a
-                      href="mailto:admin@koshilabs.com"
-                      aria-label="Email admin@koshilabs.com"
+                      href="mailto:admin@test-websites.com"
+                      aria-label="Email admin@test-websites.com"
                     >
-                      admin@koshilabs.com
+                      admin@test-websites.com
                     </a>
                   </span>
                 </motion.div>

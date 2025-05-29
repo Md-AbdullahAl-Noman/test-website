@@ -26,9 +26,9 @@ export default function Document() {
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Koshi Labs Pvt. Ltd.",
-              alternateName: "KoshiLabs",
-              url: "https://koshilabs.com",
-              logo: "https://koshilabs.com/logo.png",
+              alternateName: "test-websites",
+              url: "https://test-websites.com",
+              logo: "https://test-websites.com/logo.png",
               description:
                 "Leading software development company in Birtamode, Jhapa, Nepal specializing in custom software development, AI solutions, web applications, and digital transformation services.",
               address: {
@@ -43,7 +43,7 @@ export default function Document() {
                 "@type": "ContactPoint",
                 telephone: "+977-9817996672",
                 contactType: "customer service",
-                email: "admin@koshilabs.com",
+                email: "admin@test-websites.com",
                 availableLanguage: ["English", "Nepali"],
               },
               openingHoursSpecification: [
@@ -67,8 +67,8 @@ export default function Document() {
                 },
               ],
               sameAs: [
-                "https://www.facebook.com/koshilabs",
-                "https://www.linkedin.com/company/koshilabs",
+                "https://www.facebook.com/test-websites",
+                "https://www.linkedin.com/company/test-websites",
               ],
             }),
           }}
