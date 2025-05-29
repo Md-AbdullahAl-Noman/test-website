@@ -116,7 +116,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
 
             <div className="flex justify-center mb-8 mt-2">
               <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 font-heading tracking-tighter">
-                Koshi<span className="font-light">Labs</span>
+                Test<span className="font-light">Labs</span>
               </span>
             </div>
 
@@ -353,7 +353,7 @@ const Navbar: React.FC = () => {
             >
               <div className="flex items-center">
                 <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 font-heading tracking-tighter">
-                  Koshi<span className="font-light">Labs</span>
+                  Test<span className="font-light">Labs</span>
                 </span>
               </div>
             </a>
@@ -390,7 +390,7 @@ const Navbar: React.FC = () => {
                 <div className="relative">
                   <div className="absolute -inset-2 bg-gradient-to-r from-blue-400/10 to-purple-500/10 rounded-full blur-md"></div>
                   <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 font-heading tracking-tighter hidden sm:inline-block relative z-10">
-                    Koshi<span className="font-light">Labs</span>
+                    Test<span className="font-light">Labs</span>
                   </span>
                 </div>
               </div>

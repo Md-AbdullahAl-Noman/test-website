@@ -25,7 +25,7 @@ export default function Document() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Koshi Labs Pvt. Ltd.",
+              name: "test-websites",
               alternateName: "test-websites",
               url: "https://test-websites.com",
               logo: "https://test-websites.com/logo.png",

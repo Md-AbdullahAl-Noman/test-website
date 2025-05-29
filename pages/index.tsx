@@ -1,56 +1,51 @@
-import React, { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import Head from "next/head";
-import Script from "next/script";
+import Scrollbar from "smooth-scrollbar";
 import {
-  Code2,
-  Laptop2,
-  Database,
-  Search,
+  Boxes,
   BrainCircuit,
   Briefcase,
-  Users,
-  Rocket,
-  Zap,
-  Wand2,
-  TrendingUp,
+  Code2,
   Cpu,
-  Gem,
-  Layers3,
-  Boxes,
-  UserCircle2,
+  Database,
   Facebook,
-  X,
+  Gem,
+  Laptop2,
+  Layers3,
   Linkedin,
-  Github,
-  Instagram,
+  Mail,
   MapPin,
   Phone,
-  Mail,
-  Lock,
+  Rocket,
+  Search,
+  TrendingUp,
+  UserCircle2,
+  Users,
+  Wand2,
+  X,
+  Zap,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Head from "next/head";
+import React, { useEffect, useRef, useState } from "react";
 
 // Import our new components
-import Navbar from "@/components/layout/Navbar";
-import FloatingSVG from "@/components/ui/FloatingSVG";
-import ServiceCard from "@/components/cards/ServiceCard";
 import ProductCard from "@/components/cards/ProductCard";
-import TestimonialCard from "@/components/cards/TestimonialCard";
+import ServiceCard from "@/components/cards/ServiceCard";
 import TeamMemberCard from "@/components/cards/TeamMemberCard";
-import FaqItem from "@/components/sections/FaqItem";
-import ContactInfo from "@/components/sections/ContactInfo";
+import Navbar from "@/components/layout/Navbar";
 import ContactForm from "@/components/sections/ContactForm";
+import ContactInfo from "@/components/sections/ContactInfo";
+import FaqItem from "@/components/sections/FaqItem";
 import FloatingSVGGroup from "@/components/ui/FloatingSVGGroup";
 
 // Dummy data for products and services
 const products = [
   {
-    name: "KoshiFit",
+    name: "TechFit",
     description: "Revolutionize fitness with AI-powered personal training.",
     category: "Mobile",
     icon: <TrendingUp className="w-6 h-6 text-red-400 mb-4" />,
-    detailedDescription: `KoshiFit is a cutting-edge fitness application that leverages artificial intelligence to provide personalized workout plans and nutrition advice.
+    detailedDescription: `AX is a cutting-edge fitness application that leverages artificial intelligence to provide personalized workout plans and nutrition advice.
         <br/><br/>
         <strong>Key Features:</strong>
         <ul class="list-disc pl-5 space-y-2 mt-3 mb-4">
@@ -60,7 +55,7 @@ const products = [
           <li>Community features to connect with fitness enthusiasts</li>
           <li>Sync with wearable devices for comprehensive health tracking</li>
         </ul>
-        KoshiFit is designed to be your complete fitness companion, adapting to your needs and helping you achieve optimal results efficiently.`,
+       This application is designed to be your complete fitness companion, adapting to your needs and helping you achieve optimal results efficiently.`,
   },
   {
     name: "Accounting Suite",
@@ -367,41 +362,6 @@ const faqs = [
     answer:
       "We offer a wide range of services including software development, consulting, quality assurance, database management, performance optimization, and AI solutions. We specialize in product development, website development, system modernization, performance optimization, and strategic consulting. Our teams are skilled in providing both outsourcing services and complete project delivery.",
   },
-  {
-    question: "What makes Koshi Labs different from other software companies?",
-    answer:
-      "Koshi Labs was founded on the principles of trust, quality, and affordability. With over 9 years of experience, our small team of experts delivers high-quality solutions at competitive prices. We're transparent in every step, from client communication to our technical approach. We utilize AI tools where appropriate to enhance efficiency, and we're deeply committed to understanding your unique business needs before proposing solutions.",
-  },
-  {
-    question: "What technologies do you work with?",
-    answer:
-      "We work with modern technologies including .NET, React, React Native, and various other frameworks and platforms. We choose the best technology stack for each project's specific needs, ensuring scalability, performance, and long-term maintainability. Our expertise spans both front-end and back-end development, cloud infrastructure, and AI/ML implementation.",
-  },
-  {
-    question: "How do you approach new projects?",
-    answer:
-      "We begin by thoroughly understanding your business needs and objectives. Our approach is collaborative and transparent from the start. We develop a comprehensive project plan, establish clear milestones, and maintain regular communication throughout the development process. We believe in agile methodologies that allow for flexibility and iterative improvements based on feedback.",
-  },
-  {
-    question: "Do you offer support after project completion?",
-    answer:
-      "Yes, we offer ongoing support and maintenance to ensure your software continues to operate smoothly. We're committed to your long-term success and provide various support options to meet your needs, including regular updates, performance monitoring, and technical assistance. Our goal is to build lasting partnerships with our clients.",
-  },
-  {
-    question: "Why should I choose Koshi Labs for my software needs?",
-    answer:
-      "We offer an unwavering commitment to quality, delivering software that exceeds expectations. Our services are affordable without compromising on excellence. We combine local expertise with global standards, understanding the unique challenges of various markets. Most importantly, we view ourselves as partners, not just service providers, dedicated to your success through every stage of development and beyond.",
-  },
-  {
-    question: "How do you ensure project quality?",
-    answer:
-      "We follow industry best practices for development and quality assurance, including rigorous testing and code reviews. Quality is built into every stage of our development process. We implement continuous integration/continuous deployment pipelines, automated testing, and regular security audits. Our team adheres to established coding standards and documentation practices to ensure maintainable, high-quality code.",
-  },
-  {
-    question: "What is your pricing model?",
-    answer:
-      "We offer flexible pricing models tailored to project needs, including fixed-price projects, time and materials, and retainer-based engagements. We believe in transparent pricing with no hidden costs. During our initial consultation, we'll discuss your requirements in detail and recommend the most appropriate pricing structure for your specific project.",
-  },
 ];
 
 // Animation Variants
@@ -439,58 +399,64 @@ const cardVariants = {
 
 const HomePage: React.FC = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
-
+  const scrollbarRef = useRef<HTMLDivElement>(null);
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
-  // Add instant scrolling
+  // Initialize smooth scrollbar
   useEffect(() => {
-    // Add event listeners to all anchor links
-    const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    anchorLinks.forEach((anchor) => {
-      anchor.addEventListener("click", (e) => {
-        e.preventDefault();
-        const href = anchor.getAttribute("href");
-        if (href) {
-          const targetId = href.substring(1);
-          const targetElement = document.getElementById(targetId);
-          if (targetElement) {
-            const yOffset = -80; // Offset for fixed header
-            const y =
-              targetElement.getBoundingClientRect().top +
-              window.pageYOffset +
-              yOffset;
-            window.scrollTo({ top: y, behavior: "auto" });
-          }
-        }
+    // Check if window is defined (to prevent SSR issues)
+    if (typeof window !== "undefined" && scrollbarRef.current) {
+      const scrollbar = Scrollbar.init(scrollbarRef.current, {
+        damping: 0.1,
+        thumbMinSize: 20,
+        renderByPixels: true,
+        alwaysShowTracks: false,
+        continuousScrolling: true,
       });
-    });
 
-    // Clean up
-    return () => {
+      // Handle anchor links for smooth scrolling
+      const anchorLinks = document.querySelectorAll('a[href^="#"]');
       anchorLinks.forEach((anchor) => {
-        anchor.removeEventListener("click", () => {});
+        anchor.addEventListener("click", (e) => {
+          e.preventDefault();
+          const href = anchor.getAttribute("href");
+          if (href) {
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+              const yOffset = -80; // Offset for fixed header
+              const y = targetElement.offsetTop + yOffset;
+              scrollbar.scrollTo(0, y);
+            }
+          }
+        });
       });
-    };
+
+      // Clean up
+      return () => {
+        scrollbar.destroy();
+        anchorLinks.forEach((anchor) => {
+          anchor.removeEventListener("click", () => {});
+        });
+      };
+    }
   }, []);
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-black min-h-screen">
+    <div
+      ref={scrollbarRef}
+      className="bg-gradient-to-br from-gray-950 via-indigo-950 to-black min-h-screen"
+    >
       <Head>
-        <title>Koshi Labs - Crafting Digital Excellence</title>
-        <meta
-          name="description"
-          content="Koshi Labs Pvt. Ltd. is a leading software development company in Birtamode, Jhapa, Nepal specializing in custom software development, AI solutions, web applications, mobile apps, and digital transformation services."
-        />
+        <title>Best Software</title>
+        <meta name="description" content="leading tech company" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta
-          name="keywords"
-          content="test-websites, Koshi Labs, software development, Birtamode, Jhapa, Nepal, web development, mobile app development, database, performance optimization, AI solutions, custom software, digital transformation, IT services, consulting, Nepali tech company, software company Nepal"
-        />
+        <meta name="keywords" content="test-websites bd" />
         <meta
           property="og:title"
-          content="Koshi Labs Pvt. Ltd. - Premier Software Development Company in Nepal"
+          content="test-websites - Crafting Digital Excellence"
         />
         <meta
           property="og:description"
@@ -757,19 +723,11 @@ const HomePage: React.FC = () => {
             <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mb-8"></div>
 
             <div className="space-y-6 text-lg text-gray-300">
+              <p>leading tech compnay</p>
               <p>
-                Koshi Labs was born from the shared vision of three friends,
-                each with over 9+ years of hands-on experience in software
-                development. We witnessed firsthand the need for reliable,
-                affordable, and high-quality software solutions, particularly in
-                Nepal.
-              </p>
-              <p>
-                Frustrated by the disconnect between client needs and the
-                solutions offered, we founded Koshi Labs to bridge that gap. Our
-                mission is simple: to build trust with our clients and deliver
-                software that not only meets their requirements but also exceeds
-                their expectations.
+                Our mission is simple: to build trust with our clients and
+                deliver software that not only meets their requirements but also
+                exceeds their expectations.
               </p>
               <p>
                 We are committed to providing exceptional support and fostering
@@ -1007,222 +965,6 @@ const HomePage: React.FC = () => {
             </div>
           ))}
         </div>
-
-        {/* Open Source Section */}
-        <div className="mt-32 relative z-0">
-          <motion.div
-            variants={fadeInVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              test-websites <span className="text-pink-400">❤️</span> Open
-              Source
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              We believe in giving back to the community. Check out our open
-              source projects that help developers worldwide.
-            </p>
-            <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-8 rounded-full" />
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <motion.div
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="relative overflow-hidden bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-blue-600/20 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl"
-            >
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
-              <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl"></div>
-              <div className="absolute -top-12 -left-12 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl"></div>
-
-              <div className="p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-3 bg-blue-500/20 rounded-xl">
-                    <Code2 className="w-8 h-8 text-blue-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-white">
-                      NepDate
-                    </h3>
-                    <p className="text-gray-400">
-                      Super-fast Nepali Date struct for .NET
-                    </p>
-                  </div>
-                </div>
-                <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                  A high-performance Nepali Date struct that closely resembles
-                  the DateOnly struct in .NET, featuring smart date parsing,
-                  fiscal year operations, and comprehensive serialization
-                  support.
-                </p>
-                <a
-                  href="https://github.com/TheCrossLegCoder/NepDate"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
-                >
-                  View on GitHub
-                  <svg
-                    className="w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                  </svg>
-                </a>
-              </div>
-            </motion.div>
-
-            <motion.div
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="relative overflow-hidden bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-blue-600/20 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl"
-            >
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
-              <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl"></div>
-              <div className="absolute -top-12 -left-12 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl"></div>
-
-              <div className="p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-3 bg-purple-500/20 rounded-xl">
-                    <Database className="w-8 h-8 text-purple-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-white">
-                      PostgreSQL to MSSQL
-                    </h3>
-                    <p className="text-gray-400">Database Migration Tool</p>
-                  </div>
-                </div>
-                <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                  A powerful tool for migrating PostgreSQL databases to
-                  Microsoft SQL Server, featuring schema conversion, data
-                  migration, and comprehensive error handling.
-                </p>
-                <a
-                  href="https://github.com/sanamhub/postgresql-to-mssql"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
-                >
-                  View on GitHub
-                  <svg
-                    className="w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                  </svg>
-                </a>
-              </div>
-            </motion.div>
-
-            <motion.div
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="relative overflow-hidden bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-blue-600/20 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl"
-            >
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
-              <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl"></div>
-              <div className="absolute -top-12 -left-12 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl"></div>
-
-              <div className="p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-3 bg-pink-500/20 rounded-xl">
-                    <Wand2 className="w-8 h-8 text-pink-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-white">
-                      DotNetMapper
-                    </h3>
-                    <p className="text-gray-400">Object Mapping Library</p>
-                  </div>
-                </div>
-                <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                  A lightweight and efficient object mapping library for .NET,
-                  designed to simplify the process of mapping between different
-                  object types with minimal configuration.
-                </p>
-                <a
-                  href="https://github.com/sanamhub/DotNetMapper"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
-                >
-                  View on GitHub
-                  <svg
-                    className="w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                  </svg>
-                </a>
-              </div>
-            </motion.div>
-
-            <motion.div
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="relative overflow-hidden bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-blue-600/20 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl"
-            >
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
-              <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl"></div>
-              <div className="absolute -top-12 -left-12 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl"></div>
-
-              <div className="p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-3 bg-green-500/20 rounded-xl">
-                    <Lock className="w-8 h-8 text-green-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-white">
-                      Password Generator
-                    </h3>
-                    <p className="text-gray-400">
-                      Secure Password Creation Tool
-                    </p>
-                  </div>
-                </div>
-                <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                  A secure and customizable password generator that helps create
-                  strong, unique passwords with various complexity options and
-                  patterns.
-                </p>
-                <a
-                  href="https://github.com/sanamhub/password-generator"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
-                >
-                  View on GitHub
-                  <svg
-                    className="w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                  </svg>
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        </div>
       </section>
 
       {/* Team Section */}
@@ -1261,9 +1003,9 @@ const HomePage: React.FC = () => {
           </h2>
           <div className="w-32 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto"></div>
           <p className="mt-8 text-xl text-gray-300 max-w-3xl mx-auto">
-            Meet the experts behind Koshi Labs. With over 9+ years of
-            experience, our team is passionate about creating software solutions
-            that exceed expectations.
+            Meet the experts behind our software solutions. With over 9+ years
+            of experience, our team is passionate about creating software
+            solutions that exceed expectations.
           </p>
         </motion.div>
 
@@ -1531,7 +1273,7 @@ const HomePage: React.FC = () => {
                     ease: "easeInOut",
                   }}
                 >
-                  Koshi<span className="font-light">Labs</span>
+                  Test<span className="font-light">Labs</span>
                   <motion.div
                     className="absolute -bottom-1.5 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
                     initial={{ scaleX: 0, opacity: 0 }}
@@ -1634,7 +1376,6 @@ const HomePage: React.FC = () => {
                   <div className="p-2 bg-blue-500/10 rounded-full">
                     <MapPin className="w-5 h-5 text-blue-400" />
                   </div>
-                  <span>Birtamod, Koshi Province, Nepal</span>
                 </motion.div>
                 <motion.div
                   className="flex items-center justify-center md:justify-end gap-3"

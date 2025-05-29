@@ -25,9 +25,7 @@ const ContactInfo = () => {
         </div>
         <div>
           <p className="font-medium text-white mb-1">Address</p>
-          <p className="group-hover:text-blue-400 transition-colors">
-            Birtamod, Koshi Province, Nepal
-          </p>
+          <p className="group-hover:text-blue-400 transition-colors">BD</p>
         </div>
       </motion.div>
 

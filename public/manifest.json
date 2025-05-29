@@ -1,5 +1,5 @@
 {
-  "name": "Koshi Labs Pvt. Ltd.",
+  "name": "test-websites",
   "short_name": "test-websites",
   "description": "Premier software development company in Birtamode, Jhapa, Nepal",
   "start_url": "/",
@@ -22,7 +22,7 @@
     {
       "name": "Contact Us",
       "url": "/#contact",
-      "description": "Get in touch with Koshi Labs"
+      "description": "Get in touch"
     },
     {
       "name": "Services",
