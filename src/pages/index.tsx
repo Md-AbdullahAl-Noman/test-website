@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/src/components/ui/button";
 import { motion } from "framer-motion";
 import Scrollbar from "smooth-scrollbar";
 import {
@@ -29,14 +29,14 @@ import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
 
 // Import our new components
-import ProductCard from "@/components/cards/ProductCard";
-import ServiceCard from "@/components/cards/ServiceCard";
-import TeamMemberCard from "@/components/cards/TeamMemberCard";
-import Navbar from "@/components/layout/Navbar";
-import ContactForm from "@/components/sections/ContactForm";
-import ContactInfo from "@/components/sections/ContactInfo";
-import FaqItem from "@/components/sections/FaqItem";
-import FloatingSVGGroup from "@/components/ui/FloatingSVGGroup";
+import ProductCard from "@/src/components/cards/ProductCard";
+import ServiceCard from "@/src/components/cards/ServiceCard";
+import TeamMemberCard from "@/src/components/cards/TeamMemberCard";
+import Navbar from "@/src/components/layout/Navbar";
+import ContactForm from "@/src/components/sections/ContactForm";
+import ContactInfo from "@/src/components/sections/ContactInfo";
+import FaqItem from "@/src/components/sections/FaqItem";
+import FloatingSVGGroup from "@/src/components/ui/FloatingSVGGroup";
 
 // Dummy data for products and services
 const products = [

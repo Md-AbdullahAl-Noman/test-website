@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Modal } from "@/components/ui/modal";
+import { Button } from "@/src/components/ui/button";
+import { Modal } from "@/src/components/ui/modal";
 
 // Define the service interface
 interface ServiceProps {
