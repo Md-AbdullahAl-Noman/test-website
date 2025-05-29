@@ -1,9 +1,29 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import "../app/globals.css";
 
-export default function Document() {
+import { Inter, Manrope } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+});
+
+export const metadata = {
+  title: "test-websites",
+  description: "Leading software development company...",
+};
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <Html lang="en">
-      <Head>
+    <html lang="en">
+      <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -11,13 +31,9 @@ export default function Document() {
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        <meta charSet="utf-8" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#3B82F6" />
         <link rel="apple-touch-icon" href="/logo-icon.svg" />
-
-        {/* Schema.org markup for Google */}
         <script
           defer
           type="application/ld+json"
@@ -73,11 +89,10 @@ export default function Document() {
             }),
           }}
         />
-      </Head>
-      <body>
-        <Main />
-        <NextScript />
+      </head>
+      <body className={`${inter.variable} ${manrope.variable} font-sans`}>
+        {children}
       </body>
-    </Html>
+    </html>
   );
 }
