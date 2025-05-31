@@ -401,6 +401,7 @@ const cardVariants = {
 const HomePage: React.FC = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const scrollbarRef = useRef<HTMLDivElement>(null);
+
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
@@ -417,30 +418,44 @@ const HomePage: React.FC = () => {
         continuousScrolling: true,
       });
 
+      // Store click handlers to properly remove them later
+      const clickHandlers = new Map();
       // Handle anchor links for smooth scrolling
       const anchorLinks = document.querySelectorAll('a[href^="#"]');
       anchorLinks.forEach((anchor) => {
-        anchor.addEventListener("click", (e) => {
+        const clickHandler = (e: Event) => {
           e.preventDefault();
           const href = anchor.getAttribute("href");
           if (href) {
             const targetId = href.substring(1);
             const targetElement = document.getElementById(targetId);
             if (targetElement) {
-              const yOffset = -80; // Offset for fixed header
+              const yOffset = 0; // Offset for fixed header
               const y = targetElement.offsetTop + yOffset;
               scrollbar.scrollTo(0, y);
             }
           }
-        });
+        };
+
+        // Store the handler reference
+        clickHandlers.set(anchor, clickHandler);
+
+        // Add the event listener
+        anchor.addEventListener("click", clickHandler);
       });
 
       // Clean up
       return () => {
-        scrollbar.destroy();
+        // Remove event listeners with the correct handler references
         anchorLinks.forEach((anchor) => {
-          anchor.removeEventListener("click", () => {});
+          const handler = clickHandlers.get(anchor);
+          if (handler) {
+            anchor.removeEventListener("click", handler);
+          }
         });
+
+        // Destroy scrollbar
+        scrollbar.destroy();
       };
     }
   }, []);
@@ -495,7 +510,8 @@ const HomePage: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar />
+     
+     
 
       {/* Hero Section */}
       <header
@@ -528,7 +544,18 @@ const HomePage: React.FC = () => {
           ]}
         />
 
-        <div className="max-w-xl relative z-10 text-left mx-4 md:mx-8 mt-8">
+        <div className="max-w-xl relative z-10 text-left mx-4 md:mx-8 ">
+
+           {/* Professional Company Badge */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 backdrop-blur-sm mb-12"
+                >
+                  <div className="w-2 h-2 bg-blue-400 rounded-full mr-3" />
+                  <span className="text-sm font-semibold text-blue-300 tracking-wide">LOOMINAR TECHNOLOGY</span>
+                </motion.div>
           <motion.h1
             variants={fadeInVariants}
             initial="hidden"
@@ -536,7 +563,7 @@ const HomePage: React.FC = () => {
             className="text-5xl sm:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-8
                                    drop-shadow-lg font-heading"
           >
-            Crafting Digital Excellence
+           <span className="text-white"> Crafting Digital</span> Excellence
           </motion.h1>
           <motion.p
             variants={fadeInVariants}
@@ -547,48 +574,68 @@ const HomePage: React.FC = () => {
             Your trusted partner for innovative software solutions. We
             specialize in development, consulting, and AI-powered services.
           </motion.p>
-          <motion.div
-            variants={fadeInVariants}
-            initial="hidden"
-            animate="visible"
-            className="flex flex-wrap gap-4"
-          >
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-blue-500 to-purple-500 border-none text-white
-                        hover:from-blue-600 hover:to-purple-600 transition-all duration-300
-                        shadow-lg hover:shadow-[0_0_25px_rgba(59,130,246,0.7)] 
-                        text-xl px-10 py-6 rounded-full font-semibold"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const targetElement = document.getElementById("contact");
-                  if (targetElement) {
-                    const yOffset = -80;
-                    const y =
-                      targetElement.getBoundingClientRect().top +
-                      window.pageYOffset +
-                      yOffset;
-                    window.scrollTo({ top: y, behavior: "auto" });
-                  }
-                }}
-              >
-                <span className="flex items-center gap-2">
-                  Contact Us
-                  <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
+
+
+           <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.7 }}
+                  className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4"
+                >
+                  <motion.a
+                    href="#contact"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="group"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      const targetElement = document.getElementById("contact")
+                      if (targetElement) {
+                        const yOffset = -80
+                        const y = targetElement.getBoundingClientRect().top + window.pageYOffset + yOffset
+                        window.scrollTo({ top: y, behavior: "smooth" })
+                      }
+                    }}
                   >
-                    →
-                  </motion.span>
-                </span>
-              </Button>
-            </motion.a>
-          </motion.div>
+                    <Button
+                      size="lg"
+                      className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 border-none text-white px-8 py-6 rounded-xl font-semibold text-lg shadow-2xl hover:shadow-blue-500/25 transition-all duration-300"
+                    >
+                      <span className="flex items-center gap-3">
+                        Get Started
+                        <motion.span
+                          animate={{ x: [0, 4, 0] }}
+                          transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+                        >
+                          →
+                        </motion.span>
+                      </span>
+                    </Button>
+                  </motion.a>
+
+                  <motion.a
+                    href="#services"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      const targetElement = document.getElementById("services")
+                      if (targetElement) {
+                        const yOffset = -80
+                        const y = targetElement.getBoundingClientRect().top + window.pageYOffset + yOffset
+                        window.scrollTo({ top: y, behavior: "smooth" })
+                      }
+                    }}
+                  >
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="border-2 border-gray-600 hover:border-blue-400 text-gray-300 hover:text-white bg-transparent hover:bg-blue-500/10 px-8 py-6 rounded-xl font-semibold text-lg transition-all duration-300"
+                    >
+                      Our Services
+                    </Button>
+                  </motion.a>
+                </motion.div>
         </div>
 
         {/* Hero section globe - Only render on desktop screens, not on mobile */}

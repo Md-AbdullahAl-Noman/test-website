@@ -1,6 +1,7 @@
 import "../app/globals.css";
 
 import { Inter, Manrope } from "next/font/google";
+import Navbar from "../components/layout/Navbar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -91,6 +92,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${manrope.variable} font-sans`}>
+        <Navbar />
         {children}
       </body>
     </html>
